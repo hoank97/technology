@@ -1,0 +1,354 @@
+# Standard Library — Generic Algorithms (slices, maps, cmp)
+
+## Overview
+
+Go 1.21+ thêm các generic algorithms vào standard library — **`slices`**, **`maps`**, và **`cmp`** packages. Thay thế các pattern thường dùng trước đây.
+
+> Trước Go 1.21: phải viết tay hoặc dùng `sort.Slice`. Bây giờ: built-in generic functions.
+
+---
+
+## slices — Array/Slice Operations
+
+### Sort
+
+```go
+import "slices"
+
+names := []string{"zhao", "alice", "bob"}
+
+// Binary search (requires sorted!)
+idx, found := slices.BinarySearch(names, "bob")
+// idx = 1, found = true (sorted order: [alice, bob, zhao])
+
+// Sort ascending (a-z, 0-9)
+slices.Sort(names)
+// names: [alice, bob, zhao]
+
+// Sort descending
+slices.SortFunc(names, func(a, b string) int {
+    return strings.Compare(b, a)
+})
+// names: [zhao, bob, alice]
+
+// Stable sort (preserve equal element order)
+slices.SortStableFunc(data, compareFunc)
+
+// Check if sorted
+slices.IsSorted(names) // true after Sort
+```
+
+### Search & Contains
+
+```go
+nums := []int{1, 2, 3, 4, 5}
+
+// Contains
+found := slices.Contains(nums, 3) // true
+found = slices.Contains(nums, 10) // false
+
+// Binary search (sorted required)
+idx, ok := slices.BinarySearch(nums, 3) // 2, true
+idx, ok = slices.BinarySearch(nums, 10) // 5, false (insertion point)
+
+// Index of first match
+idx := slices.Index(nums, 3) // 2
+idx = slices.IndexFunc(nums, func(n int) bool { return n > 3 }) // 3
+
+// Last index
+idx = slices.LastIndex(nums, 3) // 2
+```
+
+### Compare & Equal
+
+```go
+a := []int{1, 2, 3}
+b := []int{1, 2, 3}
+c := []int{1, 2, 4}
+
+// Equal (order matters)
+slices.Equal(a, b) // true
+slices.Equal(a, c) // false
+
+// EqualFunc (custom comparison)
+slices.EqualFunc(a, c, func(x, y int) bool { return x%2 == y%2 }) // true (both even/odd patterns)
+
+// Compare (lexicographic, Go 1.21+)
+slices.Compare(a, c)    // -1 (a < c)
+slices.Compare(c, a)    // 1 (c > a)
+slices.Compare(a, b)    // 0 (equal)
+
+// CompareFunc
+slices.CompareFunc(a, c, func(x, y int) int { return x - y })
+```
+
+### Manipulate
+
+```go
+nums := []int{1, 2, 3, 4, 5}
+
+// Delete (in-place)
+slices.Delete(&nums, 2, 4) // nums: [1, 2, 5] (remove indices 2,3)
+
+// Insert
+slices.Insert(&nums, 2, 99, 100) // nums: [1, 2, 99, 100, 3, 4, 5]
+
+// Replace
+slices.Replace(&nums, 1, 3, 11, 12, 13) // nums: [1, 11, 12, 13, 4, 5]
+
+// Clone
+nums2 := slices.Clone(nums)
+
+// Compact (remove adjacent duplicates)
+// ⚠️ Requires sorted input
+vals := []int{1, 1, 2, 2, 2, 3}
+slices.Compact(vals) // vals: [1, 2, 3]
+
+// Concat (Go 1.21+)
+merged := slices.Concat(a, b, c)
+```
+
+### Transform
+
+```go
+nums := []int{1, 2, 3, 4, 5}
+
+// Chunk (group into chunks)
+chunks := slices.Collect(slices.Chunk([]int{1, 2, 3, 4, 5}, 2))
+// → [[1, 2], [3, 4], [5]] (collect from iterator)
+
+// Reverse
+slices.Reverse(nums) // [5, 4, 3, 2, 1]
+
+// Min / Max
+slices.Min(nums) // 1
+slices.Max(nums) // 5
+
+// MinFunc / MaxFunc
+slices.MinFunc(nums, func(a, b int) int { return b - a }) // 5 (max by custom compare)
+```
+
+### Extract & Fill
+
+```go
+nums := make([]int, 5)
+
+// Fill
+slices.Fill(nums, 42) // [42, 4`, 42, 42, 42]
+
+// Clone
+copy := slices.Clone(nums)
+
+// Grow
+nums := []int{1, 2}
+slices.Grow(&nums, 10) // allocate capacity for 10 more
+
+// Cap
+capacity := slices.Cap(nums)
+```
+
+---
+
+## maps — Map Operations
+
+### Clone, Copy, Equal
+
+```go
+import "maps"
+
+m1 := map[string]int{"a": 1, "b": 2}
+m2 := map[string]int{"a": 1, "b": 2}
+m3 := map[string]int{"b": 3, "c": 4}
+
+// Clone
+m2 := maps.Clone(m1) // shallow clone
+
+// Copy (dest + src → dest)
+m3 := maps.Clone(m1) // start with clone
+maps.Copy(m3, m2)     // m3: {"a": 1, "b": 2, "c": 4} (m2 wins on conflict)
+
+// Equal
+maps.Equal(m1, m2) // true
+maps.Equal(m1, m3) // false ("b": 2 vs "b": 3)
+
+// EqualFunc
+maps.EqualFunc(m1, m3, func(v1, v2 int) bool {
+    return v1 == v2 // same count? no
+})
+```
+
+### DeleteFunc
+
+```go
+scores := map[string]int{
+    "alice": 45,
+    "bob":   80,
+    "charlie": 95,
+    "dave":  30,
+}
+
+// Remove low scores
+maps.DeleteFunc(scores, func(k string, v int) bool {
+    return v < 50 // remove if score < 50
+})
+// scores: {"bob": 80, "charlie": 95}
+```
+
+### Keys / Values
+
+```go
+import "slices" // also need slices for converting
+
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+
+// Extract keys
+keys := slices.Sorted(maps.Keys(m)) // ["a", "b", "c"]
+// Note: maps.Keys returns []K, need slices.Sorted for order
+
+// Extract values
+values := slices.Sorted(maps.Values(m)) // [1, 2, 3]
+```
+
+---
+
+## cmp — Comparison
+
+### Compare
+
+```go
+import "cmp"
+
+cmp.Compare(1, 2)    // -1 (1 < 2)
+cmp.Compare(2, 1)    // 1 (2 > 1)
+cmp.Compare(2, 2)   // 0 (equal)
+
+// Works with any ordered type
+cmp.Compare(3.14, 2.71)     // 1
+cmp.Compare("apple", "banana") // -1
+```
+
+### Or (Go 1.22+)
+
+Return first non-zero value:
+
+```go
+import "cmp"
+
+cmp.Or(0, 42)            // 42 (0 is zero value)
+cmp.Or("", "default")    // "default"
+cmp.Or(nil, "fallback")  // "fallback"
+```
+
+### Đặt biệt hữu ích cho options/config:
+
+```go
+// Config với optional fields
+type Config struct {
+    Timeout int
+    Retries int
+}
+
+func WithDefaults(cfg *Config) {
+    cfg.Timeout = cmp.Or(cfg.Timeout, 30)
+    cfg.Retries = cmp.Or(cfg.Retries, 3)
+}
+```
+
+---
+
+## Migration: Old → New
+
+### sort.Slice → slices.SortFunc
+
+```go
+// ❌ Old way
+sort.Slice(users, func(i, j int) bool {
+    return users[i].Age < users[j].Age
+})
+
+// ✅ Go 1.21+
+slices.SortFunc(users, func(a, b User) int {
+    return cmp.Compare(a.Age, b.Age)
+})
+```
+
+### sort.Slice → slices.BinarySearchFunc
+
+```go
+// ❌ Old
+idx := sort.Search(len(users), func(i int) bool {
+    return users[i].Age >= 25
+})
+
+// ✅ Go 1.21+
+idx, found := slices.BinarySearchFunc(users, 25, func(u User, target int) int {
+    return cmp.Compare(u.Age, target)
+})
+```
+
+### Manual min → cmp.Or
+
+```go
+// ❌ Old
+func min(a, b int) int {
+    if a < b {
+        return a
+    }
+    return b
+}
+
+// ✅ Go 1.22+
+func min(a, b int) int {
+    return cmp.Or(a, b) // first non-zero... but this only works for 0/empty
+}
+
+// Correct for general case:
+func min(a, b int) int {
+    if cmp.Compare(a, b) < 0 {
+        return a
+    }
+    return b
+}
+```
+
+---
+
+## Tại sao dùng standard library thay vì manual?
+
+| | Manual | Standard Library |
+|---|---|---|
+| Type safety | ❌ Often `interface{}` | ✅ Generic |
+| Correctness | ⚠️ Easy to miss edge cases | ✅ Well-tested |
+| Performance | ⚠️ Depends on implementation | ✅ Optimized |
+| Readability | ⚠️ | ✅ Self-documenting |
+
+---
+
+## 📌 Tóm tắt
+
+```
+Standard Library Generic Algorithms
+│
+├── slices (Go 1.21+)
+│   ├── Sort/SortFunc/SortStableFunc
+│   ├── BinarySearch / Contains / Index
+│   ├── Equal / Compare / CompareFunc
+│   ├── Delete / Insert / Replace / Clone
+│   ├── Concat / Compact / Reverse
+│   └── Min / Max / Grow / Fill
+│
+├── maps (Go 1.21+)
+│   ├── Clone / Copy
+│   ├── Equal / EqualFunc
+│   └── DeleteFunc
+│
+└── cmp (Go 1.21+ / 1.22+)
+    ├── Compare: lexicographic comparison
+    └── Or (1.22+): first non-zero value
+```
+
+---
+
+## Tags
+
+#go #slices #maps #cmp #generics #go-1.21 #go-1.22 #standard-library
