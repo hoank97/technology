@@ -11,10 +11,24 @@
             "id": "417753919e5bddb1",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "02.2 - Memory Model"
             }
           }
         ]
@@ -195,14 +209,16 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "72d9a2b56bab9c8e",
+  "active": "07f89e57bb27f644",
   "lastOpenFiles": [
+    "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
+    "1 - Go/02 - Memory & Runtime/02 - Memory & Runtime.md",
+    "1 - Go/1.1 - Data Types & Basics.md",
     "1 - Go/go.md",
     "1 - Go/07 - Testing & Tooling/07 - Testing & Tooling.md",
     "1 - Go/06 - Standard Library/06 - Standard Library.md",
     "1 - Go/05 - Generics/05 - Generics.md",
     "1 - Go/03 - Concurrency/03 - Concurrency.md",
-    "1 - Go/02 - Memory & Runtime/02 - Memory & Runtime.md",
     "1 - Go/01 - Language Basics/01 - Language Basics.md",
     "1 - Go/_index.md",
     "1 - Go/07 - Testing & Tooling/07.2 - Build & Tooling.md",
@@ -217,7 +233,6 @@
     "1 - Go/03 - Concurrency/03.3 - Concurrency Tools.md",
     "1 - Go/03 - Concurrency/03.2 - Channel & Select.md",
     "1 - Go/03 - Concurrency/03.1 - Goroutine & Scheduler.md",
-    "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
     "1 - Go/02 - Memory & Runtime/02.1 - Memory & Runtime.md",
     "1 - Go/01 - Language Basics/01.2 - Control Flow & Functions.md",
     "1 - Go/01 - Language Basics/01.1 - Data Types & Basics.md",
@@ -229,7 +244,6 @@
     "1 - Go/02 - Memory & Runtime",
     "1 - Go/01 - Language Basics",
     "1 - Go/1.5 - Channel & Select.md",
-    "6 - System Design/6.9 - Retry Patterns.md",
     "6 - System Design",
     "5 - Ecosystem",
     "4 - Networking",
