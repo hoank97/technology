@@ -1,29 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [bst, cs, dfs, fundamentals, interview-prep, traversal, trees]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 06 — Trees & DFS
 
 > **Giải quyết**: Traverse, validate, construct, hoặc calculate trên tree structure — mọi bài tree đều có thể giải bằng DFS với cấu trúc `process(left) + process(right) + use results`
 
 ---
-
-## Bài Toán Giải Quyết
-
-Tree problems rơi vào các dạng:
-1. **Traversal**: Đi qua mọi node theo thứ tự
-2. **Path**: Tìm path thỏa điều kiện (max sum, exists target)
-3. **Validate**: BST valid, balanced, same tree
-4. **Construct**: Từ traversal sequences reconstruct tree
-5. **Subtree**: Tìm LCA, subtree match
-
-**Core insight**: Mọi bài tree đều là: *"Tôi biết gì về con trái, con phải → tôi có thể tính gì cho node hiện tại?"* → DFS postorder.
-
 ---
 
 ## DFS Templates
@@ -92,15 +79,6 @@ func inorder(node *TreeNode) {
 ```
 
 ---
-
-## 3 Traversal Orders
-
-| Order | Sequence | Dùng cho |
-|-------|----------|---------|
-| Preorder | Root → Left → Right | Serialize tree, copy tree |
-| Inorder | Left → Root → Right | BST → sorted, Kth smallest |
-| Postorder | Left → Right → Root | Delete tree, calculate subtree values |
-
 ---
 
 ## BST Properties
@@ -128,21 +106,6 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 ```
 
 ---
-
-## Nhận Ra Pattern
-
-| Signal | DFS type |
-|--------|---------|
-| "max/min depth", "height" | Postorder, return int |
-| "diameter" (longest path) | Postorder + global max |
-| "balanced" | Postorder, return height or -1 |
-| "validate BST" | Preorder với min/max bounds |
-| "path sum exists/count" | Preorder, pass remaining sum |
-| "max path sum" | Postorder + global result |
-| "kth smallest in BST" | Inorder (stop at k) |
-| "construct from preorder+inorder" | Recursive partition |
-| "LCA" | BST: walk; general: DFS |
-
 ---
 
 ## ✅ Ưu Điểm
@@ -160,26 +123,6 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 - Dễ quên handle `node == nil` base case
 
 ---
-
-## Iterative DFS (tránh stack overflow)
-
-```go
-// Iterative inorder
-stack := []*TreeNode{}
-curr := root
-
-for curr != nil || len(stack) > 0 {
-    for curr != nil {
-        stack = append(stack, curr)
-        curr = curr.Left
-    }
-    curr = stack[len(stack)-1]
-    stack = stack[:len(stack)-1]
-    // process curr
-    curr = curr.Right
-}
-```
-
 ---
 
 ## Trade-off: DFS vs BFS trên Tree
@@ -195,19 +138,6 @@ for curr != nil || len(stack) > 0 {
 > Nếu bài hỏi "level", "right side view", "zigzag" → BFS. Còn lại thường DFS.
 
 ---
-
-## Bài Tiêu Biểu
-
-| Bài | Template | Key |
-|-----|----------|-----|
-| Max Depth | Template 1 | `max(left,right)+1` |
-| Balanced Tree | Template 1 (-1 = unbalanced) | Return -1 nếu |left-right|>1 |
-| Diameter | Template 2 (global) | `left + right` per node |
-| Max Path Sum | Template 2 (global) | Ignore negative paths với `max(0,...)` |
-| Validate BST | Template 3 (bounds) | Pass min/max bounds xuống |
-| LCA (BST) | BST walk | Split point = LCA |
-| Construct from Pre+In | Partition | `preorder[0]` = root, find in inorder |
-
 ---
 
 ## 📌 Tóm tắt
@@ -235,7 +165,3 @@ Trees & DFS
     ├── DFS: path, subtree, validate
     └── BFS: level-order, shortest path, right-side view
 ```
-
-## Tags
-
-#trees #dfs #bst #traversal #interview-prep

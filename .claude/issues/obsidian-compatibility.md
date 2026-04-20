@@ -70,7 +70,7 @@ parent:: [[01 - Language Basics]]   ← KHÔNG PHẢI YAML
 
 **Ghi chú**: Các module 2–6 chưa audit nhưng khả năng cao cùng vấn đề.
 
-> - [ ] **[RESOLVED]** Toàn bộ files đã được fix
+> - [x] **[RESOLVED]** Toàn bộ 23 files trong `1 - Go/` đã được fix
 
 ---
 
@@ -101,7 +101,7 @@ status: complete
 
 **Files bị ảnh hưởng**: Tất cả 23 files trong `1 - Go/` (xem danh sách ở Issue #1)
 
-> - [ ] **[RESOLVED]** Toàn bộ files đã migrate tags vào YAML frontmatter
+> - [x] **[RESOLVED]** Toàn bộ 23 files đã migrate tags vào YAML frontmatter
 
 ---
 
@@ -149,7 +149,7 @@ WHERE status = "draft"
 - [ ] `1 - Go/07 - Testing & Tooling/07.1 - Testing.md` — `type: concept`
 - [ ] `1 - Go/07 - Testing & Tooling/07.2 - Build & Tooling.md` — `type: reference`
 
-> - [ ] **[RESOLVED]** Toàn bộ files đã có `type` và `status`
+> - [x] **[RESOLVED]** Toàn bộ 23 files đã có `type`, `status`, `date_created`
 
 ---
 
@@ -171,7 +171,7 @@ WHERE status = "draft"
 - [ ] `1 - Go/06 - Standard Library/06 - Standard Library.md` — `parent:: [[_index]]` → `[[1 - Go]]`
 - [ ] `1 - Go/07 - Testing & Tooling/07 - Testing & Tooling.md` — `parent:: [[_index]]` → `[[1 - Go]]`
 
-> - [ ] **[RESOLVED]** Toàn bộ broken links đã được fix
+> - [x] **[RESOLVED]** Toàn bộ 7 broken links đã được fix
 
 ---
 
@@ -200,7 +200,7 @@ status: complete
 
 - [ ] `0 - Fundamentals.md` — xóa `parent:: []`, thêm `type: index`
 
-> - [ ] **[RESOLVED]**
+> - [x] **[RESOLVED]**
 
 ---
 
@@ -208,11 +208,11 @@ status: complete
 
 | # | Issue | Mức độ | Files | Status |
 |---|-------|--------|-------|--------|
-| #1 | `parent::` sai vị trí trong YAML | 🔴 High | 23 | ⬜ Open |
-| #2 | Tags trong body thay vì frontmatter | 🟡 Medium | 23 | ⬜ Open |
-| #3 | Thiếu `type`, `status` metadata | 🟡 Medium | 23 | ⬜ Open |
-| #4 | Broken `[[_index]]` links | 🔴 High | 7 | ⬜ Open |
-| #5 | `parent:: []` invalid ở root file | 🟢 Low | 1 | ⬜ Open |
+| #1 | `parent::` sai vị trí trong YAML | 🔴 High | 23 | ✅ Done |
+| #2 | Tags trong body thay vì frontmatter | 🟡 Medium | 23 | ✅ Done |
+| #3 | Thiếu `type`, `status` metadata | 🟡 Medium | 23 | ✅ Done |
+| #4 | Broken `[[_index]]` links | 🔴 High | 7 | ✅ Done |
+| #5 | `parent:: []` invalid ở root file | 🟢 Low | 1 | ✅ Done |
 
 > **Recommended fix order**: #4 (quick, critical) → #1 (structural fix) → #2+#3 (can batch via script)
 

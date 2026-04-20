@@ -1,11 +1,14 @@
 ---
+type: index
+status: complete
+date_created: 2026-04-21
+tags: [cmp, generics, go, maps, slices]
+---
 
-parent:: [[_index]]
-
+parent:: [[1 - Go]]
 children:: [[05.1 - Generics]]
 children:: [[05.2 - Generic Algorithms (std)]]
 
----
 
 # 05. 🧬 Generics
 
@@ -17,7 +20,3 @@ children:: [[05.2 - Generic Algorithms (std)]]
 |---|--------|-------|
 | [[05.1 - Generics]] | Generics | Type parameters, constraints, generic types, vs interface{} |
 | [[05.2 - Generic Algorithms (std)]] | Generic Algorithms (std) | slices, maps, cmp packages (Go 1.21+) |
-
-## Tags
-
-#go #generics #slices #maps #cmp

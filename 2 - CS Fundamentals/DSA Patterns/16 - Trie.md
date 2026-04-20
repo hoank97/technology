@@ -1,30 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [cs, fundamentals, interview-prep, prefix-tree, string, trie, word-search]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 16 — Trie (Prefix Tree)
 
 > **Giải quyết**: Tìm kiếm theo **prefix** trong tập từ — O(L) per query (L = word length) thay vì O(n×L) linear scan
 
 ---
-
-## Bài Toán Giải Quyết
-
-Trie = cây n-ary lưu trữ ký tự theo từng level, mỗi path từ root → leaf = một từ.
-
-Dùng khi:
-1. **Prefix search**: "startsWith", autocomplete
-2. **Word dictionary**: Add words, search exact/pattern
-3. **Pattern matching**: Ký tự wildcard '.'
-4. **Word Search trên Grid**: Trie + backtracking (Word Search II)
-
-**Core insight**: Nhiều từ chia sẻ prefix → lưu prefix một lần → tiết kiệm space + search nhanh.
-
 ---
 
 ## Implementation Chuẩn
@@ -77,30 +63,6 @@ func (t *Trie) StartsWith(prefix string) bool {
 ```
 
 ---
-
-## Pattern 1: Wildcard Search (Design Add and Search)
-
-```go
-// '.' matches any character → DFS at '.' nodes
-func (t *Trie) SearchWithWildcard(word string) bool {
-    var dfs func(node *TrieNode, i int) bool
-    dfs = func(node *TrieNode, i int) bool {
-        if i == len(word) { return node.isEnd }
-        c := word[i]
-        if c == '.' {
-            for _, child := range node.children {
-                if child != nil && dfs(child, i+1) { return true }
-            }
-            return false
-        }
-        idx := c - 'a'
-        if node.children[idx] == nil { return false }
-        return dfs(node.children[idx], i+1)
-    }
-    return dfs(t.root, 0)
-}
-```
-
 ---
 
 ## Pattern 2: Word Search II (Trie + Grid Backtracking)
@@ -130,22 +92,6 @@ func dfs(node *TrieNode, r, c int, board [][]byte) {
 ```
 
 ---
-
-## Trie với Map (Flexible Keys)
-
-Khi key không phải lowercase a-z:
-
-```go
-// General Trie với map (supports any character)
-type TrieNode struct {
-    children map[rune]*TrieNode
-    isEnd    bool
-}
-
-// Dùng khi: unicode, numbers, longer alphabets
-// Tradeoff: slower (map lookup) vs [26] array (O(1))
-```
-
 ---
 
 ## Nhận Ra Pattern
@@ -160,21 +106,6 @@ type TrieNode struct {
 | "longest word in dictionary" | Trie + BFS/DFS |
 
 ---
-
-## ✅ Ưu Điểm
-
-- **O(L) search/insert** — L = word length, independent of n (number of words)
-- **Prefix queries**: trivially answered
-- **Space sharing**: common prefixes stored once
-- **Pattern matching with wildcards**: natural DFS
-
-## ❌ Nhược Điểm / Giới Hạn
-
-- **O(n×L) space** — có thể lớn với nhiều words, long words
-- **[26] children array**: 26 pointers per node dù phần lớn null → memory heavy
-- Chậm hơn Hash Set cho exact match (Hash Set: O(L) average, simpler)
-- Không hỗ trợ fuzzy search (Levenshtein distance)
-
 ---
 
 ## Trade-off vs Alternatives
@@ -190,15 +121,6 @@ type TrieNode struct {
 > **Kết luận**: Prefix queries → Trie. Chỉ exact search → Hash Set. Sorted prefix range → Binary Search trên sorted list.
 
 ---
-
-## Bài Tiêu Biểu
-
-| Bài | Pattern | Key |
-|-----|---------|-----|
-| Implement Trie | Basic | Insert/Search/StartsWith |
-| Design Add and Search Words | Wildcard | DFS on '.' |
-| Word Search II | Trie + Grid DFS | Trie prunes invalid paths |
-
 ---
 
 ## 📌 Tóm tắt
@@ -223,7 +145,3 @@ Trie (Prefix Tree)
 │
 └── vs Hash Set: Trie wins on PREFIX, HashSet wins on EXACT only
 ```
-
-## Tags
-
-#trie #prefix-tree #string #word-search #interview-prep

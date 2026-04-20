@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0 - Fundamentals.md",
+                "file": "1 - Go/03 - Concurrency/03.1 - Goroutine & Scheduler.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "0 - Fundamentals"
+              "title": "03.1 - Goroutine & Scheduler"
             }
           }
         ]
@@ -211,6 +211,7 @@
   },
   "active": "27e27ffc2db01b80",
   "lastOpenFiles": [
+    "0 - Fundamentals.md",
     "2 - CS Fundamentals/DSA Patterns/17 - Bit Manipulation.md",
     "2 - CS Fundamentals/DSA Patterns/16 - Trie.md",
     "2 - CS Fundamentals/DSA Patterns/15 - Intervals.md",
@@ -233,7 +234,6 @@
     "2 - CS Fundamentals/2.5.1 - NeetCode 250 Tracker.md",
     "1 - Go/1 - Go.md",
     "1 - Go.md",
-    "0 - Fundamentals.md",
     "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
     "CLAUDE.md",
     "1 - Go/02 - Memory & Runtime/02 - Memory & Runtime.md",

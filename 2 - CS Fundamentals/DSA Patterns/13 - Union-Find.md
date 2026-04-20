@@ -1,29 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [connected-components, cs, cycle-detection, dsu, fundamentals, graph, interview-prep, union-find]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 13 — Union-Find (Disjoint Set Union)
 
 > **Giải quyết**: **Dynamic connectivity** — merge nhóm, check same group, detect cycle trong undirected graph — O(α(n)) ≈ O(1) per operation
 
 ---
-
-## Bài Toán Giải Quyết
-
-Union-Find (DSU) dùng khi:
-1. **Connected components**: Đếm số nhóm, check cùng nhóm không
-2. **Cycle detection** (undirected): Union edge → nếu đã cùng nhóm → cycle
-3. **Redundant Connection**: Tìm edge tạo cycle trong undirected graph
-4. **Kruskal's MST**: Build minimum spanning tree
-5. **Dynamic friend groups**: Online queries
-
-**Core insight**: Mỗi component có một **representative (root)**. Hai nodes cùng component ↔ cùng root. Union = merge hai roots.
-
 ---
 
 ## Implementation Đầy Đủ
@@ -68,18 +55,6 @@ func (uf *UnionFind) Connected(x, y int) bool {
 ```
 
 ---
-
-## Pattern 1: Count Connected Components
-
-```go
-// Number of Connected Components in Undirected Graph
-uf := NewUF(n)
-for _, e := range edges {
-    uf.Union(e[0], e[1])
-}
-return uf.count
-```
-
 ---
 
 ## Pattern 2: Cycle Detection (Redundant Connection)
@@ -96,21 +71,6 @@ return nil
 ```
 
 ---
-
-## Pattern 3: Graph Valid Tree
-
-```go
-// n nodes, edges → valid tree?
-// Tree = connected (1 component) + no cycle (n-1 edges)
-if len(edges) != n-1 { return false }  // quick check
-
-uf := NewUF(n)
-for _, e := range edges {
-    if !uf.Union(e[0], e[1]) { return false }  // cycle found
-}
-return true  // uf.count == 1 (connected)
-```
-
 ---
 
 ## Tại Sao O(α(n)) ≈ O(1)?
@@ -135,19 +95,6 @@ Both (Path Compression + Union by Rank):
 ```
 
 ---
-
-## Nhận Ra Pattern
-
-| Signal | Union-Find |
-|--------|-----------|
-| "connected components" | Count via union.count |
-| "are X and Y in same group" | Find(x) == Find(y) |
-| "detect cycle in undirected" | Union→false = cycle |
-| "redundant edge", "extra edge" | First edge making cycle |
-| "valid tree" | n-1 edges + no cycle |
-| "minimum spanning tree" (Kruskal) | Sort edges + Union |
-| "accounts merge" | Union by common email |
-
 ---
 
 ## ✅ Ưu Điểm
@@ -166,20 +113,6 @@ Both (Path Compression + Union by Rank):
 - Ít linh hoạt hơn DFS/BFS cho traversal problems
 
 ---
-
-## Trade-off: Union-Find vs DFS/BFS
-
-| | Union-Find | DFS/BFS |
-|---|---|---|
-| **Connectivity check** | O(α(n)) per query | O(V+E) per query |
-| **Online queries** | ✅ | ❌ (need rebuild) |
-| **Cycle detection** | Undirected only | Both directed + undirected |
-| **Path finding** | ❌ | ✅ |
-| **Level/distance** | ❌ | ✅ (BFS) |
-| **Implementation** | Compact | More complex |
-
-> **Quy tắc**: Nếu bài hỏi về **grouping, connectivity, cycle (undirected)** → Union-Find. Nếu cần **path, distance, level** → DFS/BFS.
-
 ---
 
 ## Bài Tiêu Biểu
@@ -193,31 +126,3 @@ Both (Path Compression + Union by Rank):
 | Satisfiability of Equality Equations | Group by == | Check != against groups |
 
 ---
-
-## 📌 Tóm tắt
-
-```
-Union-Find (DSU)
-│
-├── Core: parent[] + rank[]
-│   ├── Find(x): path compression → root
-│   └── Union(x,y): merge by rank → false if already connected
-│
-├── Optimizations
-│   ├── Path Compression: flatten tree during Find
-│   └── Union by Rank: attach smaller under larger
-│   → Combined: O(α(n)) ≈ O(1)
-│
-├── Patterns
-│   ├── Count components: track uf.count
-│   ├── Cycle (undirected): Union returns false
-│   └── Dynamic grouping: online queries
-│
-├── ✅ Fastest for connectivity, online queries, O(α(n))
-└── ❌ Only undirected, no split, no path/distance
-    → Use DFS/BFS for path/level problems
-```
-
-## Tags
-
-#union-find #dsu #connected-components #cycle-detection #graph #interview-prep

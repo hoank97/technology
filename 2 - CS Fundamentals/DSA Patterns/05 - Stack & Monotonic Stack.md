@@ -1,11 +1,10 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [cs, fundamentals, histogram, interview-prep, monotonic-stack, next-greater, stack]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 05 — Stack & Monotonic Stack
 
@@ -14,60 +13,6 @@ date_created: 2026-04-21
 > **Monotonic Stack giải quyết**: Tìm **Next Greater/Smaller Element** hoặc calculate area liên quan đến "nearest element thỏa điều kiện" — O(n) thay vì O(n²)
 
 ---
-
-## Phần 1: Stack Cơ Bản
-
-### Bài Toán Giải Quyết
-
-- Matching pairs: `()`, `{}`, `[]`
-- Expression evaluation (RPN, calculator)
-- Undo operations, browser history
-- DFS iterative (thay recursive call stack)
-- "Nearest element" bài toán
-
-### Pattern: Matching Brackets
-
-```go
-stack := []byte{}
-pairs := map[byte]byte{')': '(', '}': '{', ']': '['}
-
-for i := 0; i < len(s); i++ {
-    c := s[i]
-    if c == '(' || c == '{' || c == '[' {
-        stack = append(stack, c)
-    } else {
-        if len(stack) == 0 || stack[len(stack)-1] != pairs[c] {
-            return false
-        }
-        stack = stack[:len(stack)-1]   // pop
-    }
-}
-return len(stack) == 0
-```
-
-### Pattern: Min Stack
-
-```go
-// Maintain auxiliary stack tracking minimum so far
-type MinStack struct {
-    stack    []int
-    minStack []int
-}
-
-func (ms *MinStack) Push(val int) {
-    ms.stack = append(ms.stack, val)
-    minVal := val
-    if len(ms.minStack) > 0 && ms.minStack[len(ms.minStack)-1] < val {
-        minVal = ms.minStack[len(ms.minStack)-1]
-    }
-    ms.minStack = append(ms.minStack, minVal)
-}
-
-func (ms *MinStack) GetMin() int {
-    return ms.minStack[len(ms.minStack)-1]
-}
-```
-
 ---
 
 ## Phần 2: Monotonic Stack
@@ -120,14 +65,6 @@ return maxArea
 ```
 
 ---
-
-## Phân Biệt: Monotonic Increasing vs Decreasing
-
-| | Stack order | Pop khi | Tìm được |
-|---|---|---|---|
-| **Decreasing** (lớn → nhỏ) | decreasing top→bottom | new element > top | **Next Greater** to the right |
-| **Increasing** (nhỏ → lớn) | increasing top→bottom | new element < top | **Next Smaller** / Previous smaller |
-
 ---
 
 ## Nhận Ra Pattern
@@ -143,25 +80,6 @@ return maxArea
 | "car fleet" (relative ordering) | Monotonic Stack |
 
 ---
-
-## ✅ Ưu Điểm
-
-**Classic Stack**:
-- O(n) time, O(n) space — thường không còn cách nào tốt hơn
-- Đơn giản, trực quan
-
-**Monotonic Stack**:
-- **O(n)** cho bài "next greater/smaller" — so với O(n²) brute force
-- Mỗi phần tử push/pop đúng 1 lần → amortized O(1) per element
-- Xử lý được nhiều bài tưởng phải O(n²)
-
-## ❌ Nhược Điểm / Giới Hạn
-
-- **O(n) extra space** cho stack
-- Monotonic Stack khó visualize ban đầu — cần practice để nhận ra
-- Dễ sai khi handle phần tử còn lại trong stack sau vòng lặp
-- Stack trong Go không có built-in type → dùng slice (append/re-slice)
-
 ---
 
 ## Trade-off vs Alternatives
@@ -175,18 +93,6 @@ return maxArea
 | DFS Tree/Graph | Stack (iterative) | Recursion (implicit stack) | Tùy depth |
 
 ---
-
-## Bài Tiêu Biểu
-
-| Bài | Pattern | Key |
-|-----|---------|-----|
-| Valid Parentheses | Classic matching | map close→open |
-| Min Stack | Aux min-tracking stack | minStack|
-| Evaluate RPN | Classic calculator | pop 2, push result |
-| Daily Temperatures | Monotonic decreasing | pop khi temp > top |
-| Car Fleet | Monotonic (time to reach) | pop faster = same fleet |
-| Largest Rectangle | Monotonic increasing + sentinel | width = i - left - 1 |
-
 ---
 
 ## 📌 Tóm tắt
@@ -211,7 +117,3 @@ Stack & Monotonic Stack
 ├── ✅ O(n) cho bài O(n²) nếu dùng brute force
 └── ❌ O(n) space, Monotonic khó visualize ban đầu
 ```
-
-## Tags
-
-#stack #monotonic-stack #next-greater #histogram #interview-prep

@@ -1,9 +1,9 @@
 ---
-
-parent:: [[2.5 - DSA]]
 type: index
-status: in-progress
-
+status: complete
+tags: [algorithms, cs, dsa, fundamentals, interview-prep, patterns]
+---
+parent:: [[2.5 - DSA]]
 children:: [[01 - Two Pointers]]
 children:: [[02 - Sliding Window]]
 children:: [[03 - Hash Map & Set]]
@@ -21,8 +21,6 @@ children:: [[14 - Greedy]]
 children:: [[15 - Intervals]]
 children:: [[16 - Trie]]
 children:: [[17 - Bit Manipulation]]
-
----
 
 # DSA Patterns
 
@@ -49,7 +47,3 @@ children:: [[17 - Bit Manipulation]]
 | [[15 - Intervals]] | Intervals | Overlap, merge, scheduling | "intervals", "meeting rooms", "overlap" |
 | [[16 - Trie]] | Trie | Prefix matching | "starts with", "word dictionary", "autocomplete" |
 | [[17 - Bit Manipulation]] | Bit Manipulation | Binary operations | "XOR", "bit count", "power of 2" |
-
-## Tags
-
-#dsa #patterns #algorithms #interview-prep

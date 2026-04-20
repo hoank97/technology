@@ -1,36 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [bellman-ford, bfs, cs, dfs, dijkstra, fundamentals, graphs, interview-prep, topological-sort]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 11 — Graphs
 
 > **Giải quyết**: Connected components, cycle detection, topological ordering, shortest path — bài toán có mối **quan hệ** giữa các nodes
 
 ---
-
-## Bài Toán Giải Quyết
-
-Graph problems phổ biến:
-1. **Connected Components**: Đếm số thành phần liên thông
-2. **Cycle Detection**: Có vòng lặp không (undirected/directed)
-3. **Topological Sort**: Thứ tự hợp lệ trong DAG (Course Schedule)
-4. **Shortest Path**: Weighted → Dijkstra, Unweighted → BFS
-5. **Flood Fill / Islands**: DFS/BFS trên grid
-
-**Representation**:
-```go
-// Adjacency list (thường dùng)
-graph := make(map[int][]int)
-for _, e := range edges {
-    graph[e[0]] = append(graph[e[0]], e[1])
-}
-```
-
 ---
 
 ## Pattern 1: DFS — Connected Components / Flood Fill
@@ -61,43 +41,6 @@ for r := range grid {
 ```
 
 ---
-
-## Pattern 2: Cycle Detection
-
-### Undirected Graph (DFS + parent tracking)
-
-```go
-// DFS: cycle nếu thấy visited node không phải parent
-var hasCycle func(node, parent int) bool
-hasCycle = func(node, parent int) bool {
-    visited[node] = true
-    for _, next := range graph[node] {
-        if !visited[next] {
-            if hasCycle(next, node) { return true }
-        } else if next != parent { return true }  // cycle!
-    }
-    return false
-}
-```
-
-### Directed Graph (DFS + 3 colors)
-
-```go
-// White=0, Gray=1 (in stack), Black=2 (done)
-color := make([]int, n)
-
-var dfs func(node int) bool
-dfs = func(node int) bool {
-    color[node] = 1  // gray: in current DFS path
-    for _, next := range graph[node] {
-        if color[next] == 1 { return true }   // back edge = cycle
-        if color[next] == 0 && dfs(next) { return true }
-    }
-    color[node] = 2  // black: done
-    return false
-}
-```
-
 ---
 
 ## Pattern 3: Topological Sort
@@ -131,34 +74,6 @@ return len(order) == n
 ```
 
 ---
-
-## Pattern 4: Shortest Path — Dijkstra
-
-```go
-// Network Delay Time: min time từ k đến all nodes
-dist := make([]int, n+1)
-for i := range dist { dist[i] = math.MaxInt }
-dist[k] = 0
-
-// min-heap: [dist, node]
-pq := &MinHeap{{0, k}}
-heap.Init(pq)
-
-for pq.Len() > 0 {
-    item := heap.Pop(pq).([2]int)
-    d, u := item[0], item[1]
-    if d > dist[u] { continue }  // stale
-
-    for _, e := range graph[u] {
-        v, w := e[0], e[1]
-        if dist[u]+w < dist[v] {
-            dist[v] = dist[u] + w
-            heap.Push(pq, [2]int{dist[v], v})
-        }
-    }
-}
-```
-
 ---
 
 ## Pattern 5: Bellman-Ford (Negative Weights / K Steps)
@@ -183,20 +98,6 @@ for i := 0; i <= k; i++ {
 ```
 
 ---
-
-## Nhận Ra Pattern
-
-| Signal | Algorithm |
-|--------|-----------|
-| "connected", "islands", "components" | DFS/BFS + visited |
-| "detect cycle" (undirected) | DFS + parent |
-| "detect cycle" (directed) | DFS 3-color / Kahn's |
-| "course schedule", "dependencies" | Topological Sort (Kahn's) |
-| "shortest path", weighted | Dijkstra |
-| "shortest path with at most K edges" | Bellman-Ford / DP |
-| "minimum spanning tree" | Prim's / Kruskal's |
-| "redundant connection" | Union-Find |
-
 ---
 
 ## ✅ Ưu Điểm
@@ -213,26 +114,6 @@ for i := 0; i <= k; i++ {
 - **Dense graph**: adjacency matrix O(V²) memory
 
 ---
-
-## Algorithm Selector
-
-```
-Có edge weights?
-  ├── Không → BFS (shortest hops)
-  └── Có →
-        ├── Negative weights? → Bellman-Ford
-        ├── K steps limit? → Bellman-Ford / DP
-        └── Non-negative → Dijkstra
-
-Cần order/cycle?
-  ├── Directed acyclic → Topological Sort (Kahn's)
-  └── Just detect cycle → DFS 3-color
-
-Connected components?
-  ├── Static → DFS/BFS
-  └── Dynamic (union queries) → Union-Find
-```
-
 ---
 
 ## Bài Tiêu Biểu
@@ -248,34 +129,3 @@ Connected components?
 | Reconstruct Itinerary | DFS Eulerian path | Hierholzer's algorithm |
 
 ---
-
-## 📌 Tóm tắt
-
-```
-Graphs
-│
-├── Representation: adjacency list map[int][]int
-│
-├── Traversal
-│   ├── DFS: recursive/iterative — components, paths
-│   └── BFS: queue — shortest hops, level-order
-│
-├── Cycle Detection
-│   ├── Undirected: DFS + parent tracking
-│   └── Directed: DFS 3-color (white/gray/black)
-│
-├── Topological Sort (DAG)
-│   ├── Kahn's BFS: inDegree + queue
-│   └── Auto-detects cycle (len(order) < n)
-│
-├── Shortest Path
-│   ├── Unweighted: BFS O(V+E)
-│   ├── Non-negative weights: Dijkstra O((V+E)logV)
-│   └── Negative / K steps: Bellman-Ford O(V×E)
-│
-└── Decision: weight? → neg? → K steps? → BFS/Dijkstra/Bellman-Ford
-```
-
-## Tags
-
-#graphs #dfs #bfs #dijkstra #topological-sort #bellman-ford #interview-prep

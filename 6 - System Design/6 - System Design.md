@@ -1,7 +1,9 @@
 ---
-
+type: index
+status: complete
+tags: [architecture, database, scaling, system-design]
+---
 parent:: [[0 - Fundamentals]]
-
 children:: [[6.1 - SQL vs NoSQL]]
 children:: [[6.2 - ACID vs BASE]]
 children:: [[6.3 - Transaction & Saga]]
@@ -13,8 +15,6 @@ children:: [[6.8 - Message Queue]]
 children:: [[6.9 - Retry Patterns]]
 children:: [[6.10 - Scaling]]
 children:: [[6.11 - Monolithic vs Microservices]]
-
----
 
 # 6. 🗄️ System Design
 
@@ -35,7 +35,3 @@ children:: [[6.11 - Monolithic vs Microservices]]
 | [[6.9 - Retry Patterns]] | Retry Patterns | Immediate, Fixed, Exponential, Jitter |
 | [[6.10 - Scaling]] | Scaling | Vertical, Horizontal, Sharding |
 | [[6.11 - Monolithic vs Microservices]] | Monolithic vs Microservices | Architecture decisions |
-
-## Tags
-
-#system-design #database #architecture #scaling

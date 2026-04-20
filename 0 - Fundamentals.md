@@ -1,7 +1,7 @@
 ---
-
-parent:: []
-
+type: index
+status: complete
+tags: [backend, concept, go, interview, system-design]
 ---
 
 # 📘 Fundamentals
@@ -15,20 +15,6 @@ parent:: []
 ![6 Modules](https://img.shields.io/badge/6-Modules-F9A826?style=flat-square)
 
 ---
-
-## 🗂️ Cấu trúc
-
-```
-Fundamentals/
-│
-├── 1 - Go/                        ← Ngôn ngữ Go, Memory, Concurrency, Error Handling
-├── 2 - CS Fundamentals/            ← OOP, SOLID, Process, Thread, DSA
-├── 3 - Infrastructure/            ← VM, Container, Security, Cryptography
-├── 4 - Networking/                ← Socket, HTTP/2, gRPC
-├── 5 - Ecosystem/                 ← Docker, Git, AI Tools
-└── 6 - System Design/            ← Database, Caching, MQ, Architecture
-```
-
 ---
 
 ## 📚 6 Modules
@@ -43,13 +29,3 @@ Fundamentals/
 | 🗄️ 6. System Design | [[6 - System Design]] | Database, Caching, MQ, Architecture |
 
 ---
-
-## 🚀 Next Steps
-
-- [ ] Tạo **roadmap học 30–60 ngày**
-- [ ] Tạo **flashcards / quiz** ôn phỏng vấn
-- [ ] **Giải thích sâu** từng phần
-
-## Tags
-
-#go #backend #system-design #interview

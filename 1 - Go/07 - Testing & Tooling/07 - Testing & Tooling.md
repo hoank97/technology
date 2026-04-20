@@ -1,11 +1,14 @@
 ---
+type: index
+status: complete
+date_created: 2026-04-21
+tags: [benchmarking, build, go, testing, tooling]
+---
 
-parent:: [[_index]]
-
+parent:: [[1 - Go]]
 children:: [[07.1 - Testing]]
 children:: [[07.2 - Build & Tooling]]
 
----
 
 # 07. 🧪 Testing & Tooling
 
@@ -17,7 +20,3 @@ children:: [[07.2 - Build & Tooling]]
 |---|--------|-------|
 | [[07.1 - Testing]] | Testing & Benchmarking | Table tests, httptest, benchmarking, mocking, pprof |
 | [[07.2 - Build & Tooling]] | Build & Tooling | Build constraints, runtime functions, cross-compile, profiling |
-
-## Tags
-
-#go #testing #build #tooling #benchmarking

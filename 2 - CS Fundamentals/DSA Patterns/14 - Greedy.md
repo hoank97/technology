@@ -1,26 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [cs, fundamentals, greedy, intervals, interview-prep, optimization, scheduling]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 14 — Greedy
 
 > **Giải quyết**: Bài toán tối ưu mà **local optimal = global optimal** — chọn lựa chọn tốt nhất tại mỗi bước mà không cần xét lại các bước trước
 
 ---
-
-## Bài Toán Giải Quyết
-
-Greedy = đưa ra quyết định ngay lập tức, không bao giờ undo. **Không phải lúc nào cũng đúng** — chỉ đúng khi bài toán có **Greedy Choice Property** và **Optimal Substructure**.
-
-**Greedy Choice Property**: Có một lựa chọn "locally optimal" mà luôn là một phần của globally optimal solution.
-
-**Khi nào greedy sai**: Coin change với coins tùy ý (coins=[1,3,4], target=6: greedy chọn 4+1+1=3 coins, optimal là 3+3=2 coins).
-
 ---
 
 ## Pattern 1: Interval-based Greedy
@@ -47,25 +37,6 @@ return count
 **Insight**: Sort by end → end sớm nhất = tốt nhất (để room cho intervals sau).
 
 ---
-
-## Pattern 2: Jump / Reach
-
-```go
-// Jump Game II — minimum jumps to reach end
-maxReach, jumps, currentEnd := 0, 0, 0
-
-for i := 0; i < len(nums)-1; i++ {
-    maxReach = max(maxReach, i+nums[i])  // furthest we can reach from [0..currentEnd]
-    if i == currentEnd {                  // must jump at end of current range
-        jumps++
-        currentEnd = maxReach
-    }
-}
-return jumps
-```
-
-**Insight**: Tại mỗi "jump boundary", luôn chọn điểm đến xa nhất → minimize jumps.
-
 ---
 
 ## Pattern 3: Last Occurrence Greedy
@@ -88,27 +59,6 @@ return result
 ```
 
 ---
-
-## Pattern 4: Gas Station / Circular
-
-```go
-// Gas Station: find starting position
-// Key insight: nếu total gas >= total cost → solution exists
-// Nếu current tank < 0 → reset và thử bắt đầu từ i+1
-tank, total, start := 0, 0, 0
-for i := range gas {
-    diff := gas[i] - cost[i]
-    tank += diff
-    total += diff
-    if tank < 0 {
-        start = i + 1
-        tank = 0
-    }
-}
-if total < 0 { return -1 }
-return start
-```
-
 ---
 
 ## Pattern 5: Priority-based Greedy
@@ -134,21 +84,6 @@ return true
 ```
 
 ---
-
-## Nhận Ra Pattern — Và Kiểm Tra Greedy Correctness
-
-### Checklist để dùng Greedy
-
-```
-1. Có thể sort input theo tiêu chí nào đó không?
-2. Quyết định tại mỗi bước có "locally obvious" không?
-3. Quyết định đó không bao giờ cần undo không?
-4. Có thể chứng minh greedy choice ≠ miss optimal solution?
-
-→ Nếu YES cho cả 4 → Greedy an toàn
-→ Nếu không chắc → dùng DP (đúng hơn, chậm hơn)
-```
-
 ---
 
 ## ✅ Ưu Điểm
@@ -166,19 +101,6 @@ return true
 - Với interview: dễ bị interviewer hỏi "tại sao greedy đúng ở đây?"
 
 ---
-
-## Trade-off: Greedy vs DP
-
-| | Greedy | DP |
-|---|---|---|
-| **Speed** | ✅ O(n) / O(n log n) | ⚠️ O(n²) / O(n×m) |
-| **Space** | ✅ O(1) / O(n) | ⚠️ O(n) / O(n²) |
-| **Correctness** | ⚠️ Only when provable | ✅ Always correct |
-| **Proof** | Hard (exchange argument) | Obvious (recurrence) |
-| **Use case** | Intervals, reach, scheduling | Knapsack, sequences |
-
-**Heuristic**: Nếu bài có "minimum number of X to cover Y" hoặc "maximum coverage" → thử Greedy trước, fallback DP nếu sai.
-
 ---
 
 ## Bài Tiêu Biểu
@@ -194,33 +116,3 @@ return true
 | Merge Triplets | Only accept if ≤ target | Never overshoot |
 
 ---
-
-## 📌 Tóm tắt
-
-```
-Greedy
-│
-├── Khi nào dùng
-│   ├── Local optimal = global optimal (provable)
-│   ├── "Minimum steps/pieces/coverage"
-│   └── Interval scheduling: sort by end
-│
-├── Patterns
-│   ├── Sort by end: Non-overlapping intervals
-│   ├── Track max reach: Jump Game
-│   ├── Last occurrence: Partition Labels
-│   ├── Reset on negative: Gas Station
-│   └── Process sorted + validate: Hand of Straights
-│
-├── Correctness check
-│   ├── Sort → obvious local choice → never undo?
-│   └── Không chắc → dùng DP (slower but correct)
-│
-├── ✅ O(n) or O(n log n), simple code
-└── ❌ Sai nếu bài không có greedy property
-    → Always prove or use DP as fallback
-```
-
-## Tags
-
-#greedy #intervals #scheduling #optimization #interview-prep

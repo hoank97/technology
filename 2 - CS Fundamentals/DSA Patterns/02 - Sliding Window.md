@@ -1,24 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [cs, fundamentals, interview-prep, sliding-window, subarray, substring]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 02 — Sliding Window
 
 > **Giải quyết**: Tìm subarray/substring tối ưu (longest/shortest/sum) trong O(n) — thay vì O(n²) hay O(n³) brute force
 
 ---
-
-## Bài Toán Giải Quyết
-
-Khi cần tìm **contiguous subarray hoặc substring** thỏa mãn điều kiện. Brute force kiểm tra mọi cặp (i, j) = O(n²). Sliding Window duy trì một "cửa sổ" [left, right] và mở rộng/thu hẹp thay vì restart từ đầu — mỗi phần tử chỉ được thêm/xóa khỏi window đúng 1 lần → O(n).
-
-**Core insight**: Thay vì tính lại từ đầu, **slide** window sang phải: thêm `right`, bỏ `left` khi window không còn valid.
-
 ---
 
 ## Hai Loại Window
@@ -71,17 +63,6 @@ for right := 0; right < len(s); right++ {
 **Dùng khi**: "Longest substring without...", "minimum window containing...".
 
 ---
-
-## Nhận Ra Pattern
-
-| Signal | Bài |
-|--------|-----|
-| "subarray/substring" + "contiguous" | Almost always sliding window |
-| "longest/shortest" + constraint | Variable window |
-| "exactly k" / "at most k" | Window + freq tracking |
-| "permutation of p in s" | Fixed window + freq compare |
-| "minimum window containing" | Variable window + cover check |
-
 ---
 
 ## Window State Patterns
@@ -131,21 +112,6 @@ for right := 0; right < len(s); right++ {
 ```
 
 ---
-
-## ✅ Ưu Điểm
-
-- **O(n)** — mỗi element được add/remove đúng 1 lần dù có 2 vòng for lồng nhau
-- **O(k) space** — chỉ lưu trạng thái window hiện tại (thường là freq map size k)
-- **Elegant**: loại bỏ hoàn toàn brute force O(n² / n³)
-- Áp dụng được cho cả string lẫn số
-
-## ❌ Nhược Điểm / Giới Hạn
-
-- **Chỉ hoạt động cho contiguous** (liền tiếp) — không dùng được cho subsequence
-- Window state phải **additive và removable** — nếu state phức tạp (ví dụ: max trong window) cần thêm cấu trúc (Monotonic Deque)
-- Shrink condition phải **monotonic**: khi window invalid, thêm phần tử không tự fix → cần shrink left
-- Dễ nhầm giữa `right - left + 1` vs `right - left`
-
 ---
 
 ## Trade-off vs Alternatives
@@ -158,32 +124,6 @@ for right := 0; right < len(s); right++ {
 | DP | O(n²) | O(n) | Non-contiguous (LCS, etc.) |
 
 ---
-
-## Monotonic Deque — Mở Rộng
-
-Khi cần **max/min trong sliding window** → Deque (Double-ended queue):
-
-```go
-// Sliding Window Maximum
-dq := []int{} // stores indices, decreasing value
-result := []int{}
-
-for i := 0; i < len(nums); i++ {
-    // bỏ phần tử out of window
-    for len(dq) > 0 && dq[0] < i-k+1 {
-        dq = dq[1:]
-    }
-    // bỏ phần tử nhỏ hơn nums[i] (không có ích)
-    for len(dq) > 0 && nums[dq[len(dq)-1]] < nums[i] {
-        dq = dq[:len(dq)-1]
-    }
-    dq = append(dq, i)
-    if i >= k-1 {
-        result = append(result, nums[dq[0]])
-    }
-}
-```
-
 ---
 
 ## Bài Tiêu Biểu
@@ -198,33 +138,3 @@ for i := 0; i < len(nums); i++ {
 | Sliding Window Maximum | Fixed + Monotonic Deque | deque of indices |
 
 ---
-
-## 📌 Tóm tắt
-
-```
-Sliding Window
-│
-├── Khi nào
-│   ├── Contiguous subarray/substring
-│   └── Longest/Shortest/Sum tối ưu
-│
-├── Fixed Window (size k cố định)
-│   └── Add right, remove left-k → O(n)
-│
-├── Variable Window (shrink khi invalid)
-│   ├── Expand right
-│   ├── Shrink left until valid
-│   └── Update answer khi valid
-│
-├── Window State
-│   ├── Freq map: char/num count
-│   ├── Single counter: sum, have/need
-│   └── Deque: max/min in window
-│
-├── ✅ O(n) — mỗi element processed đúng 1 lần
-└── ❌ Chỉ contiguous, state phải monotonic
-```
-
-## Tags
-
-#sliding-window #substring #subarray #interview-prep

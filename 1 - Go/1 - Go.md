@@ -1,7 +1,13 @@
 ---
 
-parent:: [[0 - Fundamentals]]
+type: index
+status: complete
+date_created: 2026-04-21
+tags: [go, module]
 
+---
+
+parent:: [[0 - Fundamentals]]
 children:: [[01 - Language Basics]]
 children:: [[02 - Memory & Runtime]]
 children:: [[03 - Concurrency]]
@@ -27,7 +33,3 @@ children:: [[07 - Testing & Tooling]]
 | [[05 - Generics]] | 🧬 Generics | Type Parameters, Generic Algorithms (std) |
 | [[06 - Standard Library]] | 📦 Standard Library | Structured Logging (slog) |
 | [[07 - Testing & Tooling]] | 🧪 Testing & Tooling | Testing, Benchmarking, Build & Profiling |
-
-## Tags
-
-#go

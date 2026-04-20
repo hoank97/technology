@@ -1,29 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [cs, fundamentals, intervals, interview-prep, merge, scheduling, sweep-line]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 15 — Intervals
 
 > **Giải quyết**: Bài toán về **ranges/intervals** — merge overlaps, find gaps, minimum coverage, scheduling — thường bắt đầu bằng **sort**
 
 ---
-
-## Bài Toán Giải Quyết
-
-Interval problems khi input là các đoạn `[start, end]`:
-1. **Merge**: Gộp overlapping intervals
-2. **Insert**: Thêm interval vào sorted list
-3. **Minimum coverage**: Ít intervals nhất để cover range
-4. **Schedule**: Đếm rooms cần thiết, detect conflict
-5. **Remove to make non-overlapping**: Minimum removals
-
-**Core insight**: Hầu hết interval problems yêu cầu **sort by start** (hoặc end) trước.
-
 ---
 
 ## Pattern 1: Merge Intervals
@@ -49,34 +36,6 @@ return result
 ```
 
 ---
-
-## Pattern 2: Insert Interval
-
-```go
-// Insert new interval into sorted non-overlapping list
-result := [][]int{}
-i := 0
-
-// 1. Add all intervals BEFORE new interval
-for i < len(intervals) && intervals[i][1] < newInterval[0] {
-    result = append(result, intervals[i]); i++
-}
-
-// 2. Merge all overlapping intervals with new
-for i < len(intervals) && intervals[i][0] <= newInterval[1] {
-    newInterval[0] = min(newInterval[0], intervals[i][0])
-    newInterval[1] = max(newInterval[1], intervals[i][1])
-    i++
-}
-result = append(result, newInterval)
-
-// 3. Add remaining intervals AFTER
-for i < len(intervals) {
-    result = append(result, intervals[i]); i++
-}
-return result
-```
-
 ---
 
 ## Pattern 3: Meeting Rooms II (Min Rooms)
@@ -105,27 +64,6 @@ return rooms
 ```
 
 ---
-
-## Pattern 4: Non-overlapping Intervals (Minimum Removal)
-
-```go
-// Sort by END time → greedy: keep interval with earliest end
-sort.Slice(intervals, func(i, j int) bool {
-    return intervals[i][1] < intervals[j][1]
-})
-
-end := intervals[0][1]
-removals := 0
-for i := 1; i < len(intervals); i++ {
-    if intervals[i][0] < end {
-        removals++  // overlap → remove (keep the one with earlier end)
-    } else {
-        end = intervals[i][1]
-    }
-}
-return removals
-```
-
 ---
 
 ## Pattern 5: Minimum Interval to Include Each Query
@@ -160,24 +98,6 @@ return result
 ```
 
 ---
-
-## Overlap Logic
-
-```
-Interval A = [a1, a2]
-Interval B = [b1, b2]
-
-Overlap condition:
-  a1 <= b2 AND b1 <= a2
-  ↔ NOT (a2 < b1 OR b2 < a1)
-
-Merge condition (after sort by start):
-  B.start <= A.end  (B starts before A ends)
-
-Contained condition:
-  a1 <= b1 AND b2 <= a2
-```
-
 ---
 
 ## Nhận Ra Pattern
@@ -192,19 +112,6 @@ Contained condition:
 | "cover range with minimum intervals" | Greedy sort |
 
 ---
-
-## ✅ Ưu Điểm
-
-- **O(n log n)** — sort + O(n) scan
-- Pattern rõ ràng: sort → scan → merge/count
-- Greedy thường đúng cho interval scheduling
-
-## ❌ Nhược Điểm / Giới Hạn
-
-- **Boundary conditions**: `<=` vs `<` khi check overlap — dễ sai
-- Interval với start = end (point) cần handle riêng
-- "Minimum Interval to Include Each Query" cần heap → phức tạp hơn
-
 ---
 
 ## Bài Tiêu Biểu
@@ -219,27 +126,3 @@ Contained condition:
 | Min Interval for Each Query | Heap + sweep | start + offline queries |
 
 ---
-
-## 📌 Tóm tắt
-
-```
-Intervals
-│
-├── Always: Sort first (by start or end)
-│
-├── Patterns
-│   ├── Merge: sort start → scan, extend end
-│   ├── Insert: 3-phase (before / overlap / after)
-│   ├── Min rooms: sort starts+ends → two-pointer
-│   ├── Min removal: sort end → greedy keep earliest end
-│   └── Query range: sort + heap + offline
-│
-├── Overlap: B.start <= A.end (after sort by start)
-│
-├── ✅ O(n log n), clear pattern
-└── ❌ Boundary conditions (< vs <=) — careful!
-```
-
-## Tags
-
-#intervals #scheduling #merge #sweep-line #interview-prep

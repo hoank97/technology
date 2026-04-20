@@ -1,28 +1,16 @@
 ---
-
-parent:: [[00 - DSA Patterns]]
 type: concept
 status: complete
 date_created: 2026-04-21
-
+tags: [cs, dp-2d, dynamic-programming, edit-distance, fundamentals, grid, interview-prep, lcs]
 ---
+parent:: [[00 - DSA Patterns]]
 
 # 10 — Dynamic Programming (2D)
 
 > **Giải quyết**: Bài toán tối ưu/đếm liên quan đến **2 sequences** (strings, arrays) hoặc **grid** — state phụ thuộc vào 2 chiều
 
 ---
-
-## Bài Toán Giải Quyết
-
-2D DP xuất hiện khi:
-1. **Hai chuỗi**: So sánh, edit, match giữa string s và t
-2. **Grid path**: Tìm đường đi tối ưu trong ma trận
-3. **Interval DP**: Tính trên đoạn [i, j] (palindrome, burst balloons)
-4. **Knapsack 2D**: Weight + value, 2 constraints
-
-**State**: `dp[i][j]` = answer cho subproblem liên quan đến `s1[0..i]` và `s2[0..j]` (hoặc cell (i,j)).
-
 ---
 
 ## Pattern 1: Two Strings — LCS Family
@@ -81,40 +69,6 @@ for i := 1; i <= m; i++ {
 ```
 
 ---
-
-## Pattern 2: Grid Path
-
-```go
-// Unique Paths: từ (0,0) → (m-1,n-1), chỉ đi right/down
-dp := make([][]int, m)
-for i := range dp { dp[i] = make([]int, n) }
-
-for i := 0; i < m; i++ { dp[i][0] = 1 }  // first col
-for j := 0; j < n; j++ { dp[0][j] = 1 }  // first row
-
-for i := 1; i < m; i++ {
-    for j := 1; j < n; j++ {
-        dp[i][j] = dp[i-1][j] + dp[i][j-1]
-    }
-}
-return dp[m-1][n-1]
-```
-
-### Grid với obstacles / costs
-
-```go
-// Minimum path sum
-for i := 0; i < m; i++ {
-    for j := 0; j < n; j++ {
-        if i == 0 && j == 0 { continue }
-        up, left := math.MaxInt, math.MaxInt
-        if i > 0 { up = dp[i-1][j] }
-        if j > 0 { left = dp[i][j-1] }
-        dp[i][j] = grid[i][j] + min(up, left)
-    }
-}
-```
-
 ---
 
 ## Pattern 3: Interval DP
@@ -136,26 +90,6 @@ for length := 1; length <= n; length++ {
 ```
 
 ---
-
-## Pattern 4: 2D Knapsack
-
-```go
-// Coin Change 2: số cách trả amount dùng coins (unlimited)
-// dp[i][j] = số cách dùng coins[0..i-1] để đạt sum j
-dp := make([][]int, len(coins)+1)
-for i := range dp { dp[i] = make([]int, amount+1); dp[i][0] = 1 }
-
-for i := 1; i <= len(coins); i++ {
-    for j := 0; j <= amount; j++ {
-        dp[i][j] = dp[i-1][j]                      // không dùng coin i
-        if j >= coins[i-1] {
-            dp[i][j] += dp[i][j-coins[i-1]]         // dùng coin i (unlimited)
-        }
-    }
-}
-// Space optimize: flatten to 1D (unbounded → iterate forward)
-```
-
 ---
 
 ## Space Optimization
@@ -178,20 +112,6 @@ for i := 1; i <= m; i++ {
 ```
 
 ---
-
-## Nhận Ra Pattern
-
-| Signal | DP 2D type |
-|--------|-----------|
-| "two strings", "edit distance" | Two-string DP |
-| "common subsequence/substring" | LCS family |
-| "distinct subsequences" | Count DP on 2 strings |
-| "grid", "robot paths", "min path" | Grid DP |
-| "burst balloons", "matrix chain" | Interval DP |
-| "coin change II" (count ways) | 2D Knapsack |
-| "regular expression matching" | 2D string DP |
-| "interleaving strings" | 2D DP |
-
 ---
 
 ## ✅ Ưu Điểm
@@ -207,16 +127,6 @@ for i := 1; i <= m; i++ {
 - **Transition order** quan trọng: phải fill đúng thứ tự để có dependencies
 
 ---
-
-## Trade-off: 2D DP vs Recursion+Memo
-
-| | 2D DP (bottom-up) | Recursion+Memo (top-down) |
-|---|---|---|
-| **Code** | Harder to write | Closer to natural recursion |
-| **Performance** | Faster (no overhead) | Slightly slower |
-| **Space** | Optimizable | O(m×n) memo dict |
-| **Subproblems** | All computed | Only needed ones |
-
 ---
 
 ## Bài Tiêu Biểu
@@ -233,32 +143,3 @@ for i := 1; i <= m; i++ {
 | Regular Expression | 2D DP | handle `*` with 0 or 1+ prev |
 
 ---
-
-## 📌 Tóm tắt
-
-```
-Dynamic Programming 2D
-│
-├── Khi nào
-│   ├── Two strings: compare, edit, match
-│   ├── Grid: path counting, min cost
-│   ├── Interval [i,j]: burst balloons
-│   └── 2D Knapsack: 2 constraints
-│
-├── State: dp[i][j] = subproblem(s1[0..i], s2[0..j]) or cell(i,j)
-│
-├── Patterns
-│   ├── LCS: match→diag+1, else max(up,left)
-│   ├── Edit Distance: match→diag, else 1+min(3dirs)
-│   ├── Grid: dp[i][j] = dp[i-1][j] + dp[i][j-1]
-│   └── Interval: fix length outer, endpoints inner
-│
-├── Space: O(m×n) → O(n) rolling array
-│
-└── ✅ Exact for 2-variable problems
-    ❌ O(m×n) — slow when m,n > 10^4
-```
-
-## Tags
-
-#dynamic-programming #dp-2d #lcs #edit-distance #grid #interview-prep

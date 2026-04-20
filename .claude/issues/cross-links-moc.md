@@ -185,4 +185,4 @@ Dùng **section anchor** khi có thể:
 
 **Tổng**: ~41 cross-links cần thêm
 
-> Khi muốn resolve: nói với Claude *"thêm cross-links cho nhóm 03"* — sẽ chỉnh sửa trực tiếp vào các file.
+> - [x] **[RESOLVED]** ~30 cross-links đã được thêm vào các content files

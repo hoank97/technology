@@ -1,14 +1,14 @@
 ---
-
+type: index
+status: complete
+tags: [concurrency, cs, fundamentals, oop, solid]
+---
 parent:: [[0 - Fundamentals]]
-
 children:: [[2.1 - OOP & SOLID]]
 children:: [[2.2 - Concurrency vs Parallelism]]
 children:: [[2.3 - Process & Thread]]
 children:: [[2.4 - CAP Theorem]]
 children:: [[2.5 - DSA]]
-
----
 
 # 2. 🧱 CS Fundamentals
 
@@ -23,7 +23,3 @@ children:: [[2.5 - DSA]]
 | [[2.3 - Process & Thread]] | Process & Thread | OS Thread and Process |
 | [[2.4 - CAP Theorem]] | CAP Theorem | Consistency, Availability, Partition Tolerance |
 | [[2.5 - DSA]] | DSA | Data Structures & Algorithms (placeholder) |
-
-## Tags
-
-#cs #oop #solid #concurrency
