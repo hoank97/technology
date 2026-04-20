@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "1573d463e7734199",
+        "id": "3a7ee8841ccec9a1",
         "type": "tabs",
         "children": [
           {
-            "id": "417753919e5bddb1",
+            "id": "27e27ffc2db01b80",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
-                "mode": "preview",
+                "file": "0 - Fundamentals.md",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "02.2 - Memory Model"
+              "title": "0 - Fundamentals"
             }
           }
         ]
@@ -209,9 +209,13 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "07f89e57bb27f644",
+  "active": "27e27ffc2db01b80",
   "lastOpenFiles": [
+    "1 - Go/1 - Go.md",
+    "1 - Go.md",
+    "0 - Fundamentals.md",
     "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
+    "CLAUDE.md",
     "1 - Go/02 - Memory & Runtime/02 - Memory & Runtime.md",
     "1 - Go/1.1 - Data Types & Basics.md",
     "1 - Go/go.md",
@@ -233,9 +237,6 @@
     "1 - Go/03 - Concurrency/03.3 - Concurrency Tools.md",
     "1 - Go/03 - Concurrency/03.2 - Channel & Select.md",
     "1 - Go/03 - Concurrency/03.1 - Goroutine & Scheduler.md",
-    "1 - Go/02 - Memory & Runtime/02.1 - Memory & Runtime.md",
-    "1 - Go/01 - Language Basics/01.2 - Control Flow & Functions.md",
-    "1 - Go/01 - Language Basics/01.1 - Data Types & Basics.md",
     "1 - Go/07 - Testing & Tooling",
     "1 - Go/06 - Standard Library",
     "1 - Go/05 - Generics",
@@ -243,7 +244,6 @@
     "1 - Go/03 - Concurrency",
     "1 - Go/02 - Memory & Runtime",
     "1 - Go/01 - Language Basics",
-    "1 - Go/1.5 - Channel & Select.md",
     "6 - System Design",
     "5 - Ecosystem",
     "4 - Networking",
