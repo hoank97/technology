@@ -31,5 +31,5 @@ children:: [[07 - Testing & Tooling]]
 | [[03 - Concurrency]] | ⚡ Concurrency | Goroutine, Channel, Concurrency Tools |
 | [[04 - Error Handling]] | 💥 Error Handling | Error is a Value, Custom Error, Panic & Recover |
 | [[05 - Generics]] | 🧬 Generics | Type Parameters, Generic Algorithms (std) |
-| [[06 - Standard Library]] | 📦 Standard Library | Structured Logging (slog) |
+| [[06 - Standard Library]] | 📦 Standard Library | slog, I/O & Text, JSON & Encoding, Reflection, HTTP, Database |
 | [[07 - Testing & Tooling]] | 🧪 Testing & Tooling | Testing, Benchmarking, Build & Profiling |

@@ -8,6 +8,7 @@ tags: [gc, go, memory, runtime]
 parent:: [[1 - Go]]
 children:: [[02.1 - Memory & Runtime]]
 children:: [[02.2 - Memory Model]]
+children:: [[02.3 - unsafe Package]]
 
 
 # 02. 🔧 Memory & Runtime
@@ -20,3 +21,4 @@ children:: [[02.2 - Memory Model]]
 |---|--------|-------|
 | [[02.1 - Memory & Runtime]] | Memory & Runtime | Stack, Heap, Escape Analysis, GC (tri-color), write barrier, pacing |
 | [[02.2 - Memory Model]] | Memory Model | Happens-before, synchronizes-with, data race, race detector |
+| [[02.3 - unsafe Package]] | unsafe Package | Pointer conversions, string/[]byte zero-copy, safety rules |

@@ -10,6 +10,7 @@ children:: [[3.3 - Symmetric vs Asymmetric]]
 children:: [[3.4 - TLS & HTTPS]]
 children:: [[3.5 - Password Storage]]
 children:: [[3.6 - JWT & Signature]]
+children:: [[3.7 - IaC]]
 
 # 3. 🏗️ Infrastructure
 
@@ -25,3 +26,4 @@ children:: [[3.6 - JWT & Signature]]
 | [[3.4 - TLS & HTTPS]] | TLS & HTTPS | Transport Layer Security |
 | [[3.5 - Password Storage]] | Password Storage | Bcrypt, Argon2, Salt |
 | [[3.6 - JWT & Signature]] | JWT & Signature | Token-based auth, digital signatures |
+| [[3.7 - IaC]] | IaC | Terraform, Pulumi, Ansible, state management, drift detection |

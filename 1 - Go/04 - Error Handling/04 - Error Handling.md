@@ -9,6 +9,7 @@ parent:: [[1 - Go]]
 children:: [[04.1 - Error is a Value]]
 children:: [[04.2 - Custom Error]]
 children:: [[04.3 - Panic & Recover]]
+children:: [[04.4 - Context Internals]]
 
 
 # 04. 💥 Error Handling
@@ -22,4 +23,5 @@ children:: [[04.3 - Panic & Recover]]
 | [[04.1 - Error is a Value]] | Error is a Value | Go's philosophy, return error |
 | [[04.2 - Custom Error]] | Custom Error | Sentinel, custom type, wrapping |
 | [[04.3 - Panic & Recover]] | Panic & Recover | When to panic, how to recover |
+| [[04.4 - Context Internals]] | Context Internals | Cancel/timeout propagation, WithValue type-safety, context hierarchy |
 -handling

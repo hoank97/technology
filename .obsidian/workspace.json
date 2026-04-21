@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1 - Go/03 - Concurrency/03.1 - Goroutine & Scheduler.md",
+                "file": "1 - Go/03 - Concurrency/03 - Concurrency.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,10 +28,35 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "03.1 - Goroutine & Scheduler"
+              "title": "03 - Concurrency"
+            }
+          },
+          {
+            "id": "5e3e2eac3283b6d3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1 - Go/02 - Memory & Runtime/02.1 - Memory & Runtime.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "02.1 - Memory & Runtime"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -63,7 +88,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#go",
+                "query": "tag:#gomemlimit",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -84,7 +109,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "c0ca33858a1aaa39",
@@ -209,35 +235,37 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "27e27ffc2db01b80",
+  "active": "07f89e57bb27f644",
   "lastOpenFiles": [
-    "0 - Fundamentals.md",
-    "2 - CS Fundamentals/DSA Patterns/17 - Bit Manipulation.md",
-    "2 - CS Fundamentals/DSA Patterns/16 - Trie.md",
-    "2 - CS Fundamentals/DSA Patterns/15 - Intervals.md",
-    "2 - CS Fundamentals/DSA Patterns/14 - Greedy.md",
-    "2 - CS Fundamentals/DSA Patterns/13 - Union-Find.md",
-    "2 - CS Fundamentals/DSA Patterns/12 - Heap & Priority Queue.md",
-    "2 - CS Fundamentals/DSA Patterns/11 - Graphs.md",
-    "2 - CS Fundamentals/DSA Patterns/10 - Dynamic Programming 2D.md",
-    "2 - CS Fundamentals/DSA Patterns/09 - Dynamic Programming 1D.md",
-    "2 - CS Fundamentals/DSA Patterns/08 - Backtracking.md",
-    "2 - CS Fundamentals/DSA Patterns/07 - BFS.md",
-    "2 - CS Fundamentals/DSA Patterns/06 - Trees & DFS.md",
-    "2 - CS Fundamentals/DSA Patterns/05 - Stack & Monotonic Stack.md",
-    "2 - CS Fundamentals/DSA Patterns/04 - Binary Search.md",
-    "2 - CS Fundamentals/DSA Patterns/03 - Hash Map & Set.md",
-    "2 - CS Fundamentals/DSA Patterns/02 - Sliding Window.md",
-    "2 - CS Fundamentals/DSA Patterns/01 - Two Pointers.md",
-    "2 - CS Fundamentals/DSA Patterns/00 - DSA Patterns.md",
+    "7 - DevOps/7.6 - Multi-cluster & Federation.md",
+    "3 - Infrastructure/3.9 - Secret Management.md",
+    "3 - Infrastructure/3.8 - Cloud Native.md",
+    "2 - CS Fundamentals/2.7 - CPU & OS Scheduler.md",
+    "2 - CS Fundamentals/2.6 - Process & Thread Deep Dive.md",
+    "6 - System Design/6.15 - Rate Limiting & Idempotency.md",
+    "6 - System Design/6.14 - API Gateway.md",
+    "6 - System Design/6.13 - CQRS & Event Sourcing.md",
+    "6 - System Design/6.12 - Database Sharding.md",
+    "5 - Ecosystem/5.7 - Git Advanced.md",
+    "5 - Ecosystem/5.6 - Container Network.md",
+    "4 - Networking/4.6 - WebSocket & SSE.md",
+    "4 - Networking/4.5 - Load Balancing & CDN.md",
+    "4 - Networking/4.4 - DNS & Service Discovery.md",
+    "1 - Go/1.9 - HTTP Client & Networking.md",
+    "1 - Go/1.8 - Context & Cancellation.md",
+    "1 - Go/1.7 - SQL & Database.md",
+    "3 - Infrastructure/3.7 - IaC.md",
+    "7 - DevOps/7.4 - Service Mesh.md",
+    "7 - DevOps/7.3 - GitOps.md",
+    "1 - Go/04 - Error Handling/04.4 - Context Internals.md",
+    "7 - DevOps/7.5 - Observability.md",
+    "7 - DevOps/7.2 - Helm.md",
+    "1 - Go/06 - Standard Library/06.6 - Database & SQL.md",
+    "1 - Go/02 - Memory & Runtime/02.3 - unsafe Package.md",
+    "1 - Go/06 - Standard Library/06.5 - HTTP Server & Client.md",
+    "7 - DevOps",
+    "1 - Go/06 - Standard Library/06.2 - I",
     "2 - CS Fundamentals/DSA Patterns",
-    "2 - CS Fundamentals/2.5.1 - NeetCode 250 Tracker.md",
-    "1 - Go/1 - Go.md",
-    "1 - Go.md",
-    "1 - Go/02 - Memory & Runtime/02.2 - Memory Model.md",
-    "CLAUDE.md",
-    "1 - Go/02 - Memory & Runtime/02 - Memory & Runtime.md",
-    "1 - Go/1.1 - Data Types & Basics.md",
     "1 - Go/07 - Testing & Tooling",
     "1 - Go/06 - Standard Library",
     "1 - Go/05 - Generics",
@@ -245,8 +273,6 @@
     "1 - Go/03 - Concurrency",
     "1 - Go/02 - Memory & Runtime",
     "1 - Go/01 - Language Basics",
-    "6 - System Design",
-    "5 - Ecosystem",
     "Untitled.canvas",
     "Fundamentals/1 - Go/Untitled.canvas"
   ]
